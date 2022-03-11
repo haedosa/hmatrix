@@ -57,6 +57,7 @@ module Numeric.LinearAlgebra.Static(
     -- * Element access
     Coord(..), ElementAccess(..),
     -- * Existential Wrappers
+    SomeR(..), SomeL(..), SomeC(..), SomeM(..),
     toSomeR, toSomeL, toSomeC, toSomeM,
     toContR, toContL, toContC, toContM
 ) where
