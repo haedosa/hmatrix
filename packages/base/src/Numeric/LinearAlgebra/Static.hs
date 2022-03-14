@@ -14,6 +14,7 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE NoStarIsType #-}
+{-# LANGUAGE ImpredicativeTypes #-}
 
 
 {- |
@@ -703,7 +704,18 @@ toContM a = return $ toSomeM a
 --------------------------------------------------------------------------------
 
 
+newtype Test a = Test Double
 
+x1 :: forall z. (forall a. Test a -> z) -> z
+x1 f = f t
+  where t = Test 10.0
+
+x2 :: forall z. (forall a. Test a -> z) -> z
+x2 f = f t
+  where t = Test 20.0
+
+xs :: [forall z. (forall a. Test a -> z) -> z]
+xs = [x1, x2]
 
 -- type GL = forall n m . (KnownNat n, KnownNat m) => L m n
 -- type GSq = forall n . KnownNat n => Sq n
