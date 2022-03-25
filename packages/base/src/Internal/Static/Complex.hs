@@ -143,7 +143,7 @@ a === b = mkM (extract a LA.=== extract b)
 
 infixl 3 |||
 (|||) :: (KnownNat r, KnownNat c1, KnownNat c2, KnownNat (c1+c2)) => M r c1 -> M r c2 -> M r (c1+c2)
-a ||| b = tr (tr a === tr b)
+a ||| b = mkM (extract a LA.||| extract b)
 
 
 type Sq n  = M n n
