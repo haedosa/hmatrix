@@ -26,10 +26,10 @@
         };
       in rec {
 
-        devShell = import ./develop.nix { inherit pkgs; };
+        devShells.default = import ./develop.nix { inherit pkgs; };
 
-        defaultPackage = pkgs.haskellPackages.hmatrix;
         packages = {
+          default = self.packages.${system}.hmatrix;
           hmatrix = pkgs.haskellPackages.hmatrix;
           hmatrix-glpk = pkgs.haskellPackages.hmatrix-glpk;
           hmatrix-gsl = pkgs.haskellPackages.hmatrix-gsl;
