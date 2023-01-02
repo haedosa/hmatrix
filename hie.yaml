@@ -1,0 +1,13 @@
+cradle:
+  cabal:
+    - path: "packages/base/src"
+      component: "lib:hmatrix"
+
+    - path: "packages/glpk/src"
+      component: "lib:hmatrix-glpk"
+
+    - path: "packages/gsl/src"
+      component: "lib:hmatrix-gsl"
+
+    - path: "packages/special/lib"
+      component: "lib:hmatrix-special"
