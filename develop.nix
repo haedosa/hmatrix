@@ -15,6 +15,19 @@
                  '"
   '';
 
+  ghcid-gsl = let
+    ghcid = "${ghcid-bin}/bin/ghcid";
+    out = "$out/bin/ghcid";
+  in runCommand "ghcid" { buildInputs = [ makeWrapper ]; } ''
+    makeWrapper ${ghcid} ${out} --add-flags \
+      "--command='cd packages/gsl && \
+                    cabal repl lib:hmatrix-gsl \
+                    --flags=openblas \
+                    --extra-lib-dirs=${openblasCompat}/lib \
+                    --extra-include-dir=${openblasCompat}/include \
+                 '"
+  '';
+
 in haskellPackages.shellFor {
   withHoogle = true;
   packages = p: with p; [
@@ -32,6 +45,7 @@ in haskellPackages.shellFor {
     ]) ++
     [ ghcid-bin
       ghcid-bin-with-openblas
+      ghcid-gsl
       cabal-install
     ];
 
