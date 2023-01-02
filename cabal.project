@@ -1,0 +1,5 @@
+packages:
+  packages/base
+  packages/gsl
+  packages/glpk
+  packages/special
