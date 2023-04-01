@@ -1,19 +1,18 @@
-{ mkDerivation, array, base, binary, bytestring, darwin, deepseq
-, openblasCompat, primitive, random, semigroups, split, stdenv
-, storable-complex, vector
+{ mkDerivation, array, base, binary, bytestring, deepseq
+, finite-typelits, lib, mtl, blas, lapack, primitive, random
+, semigroups, split, storable-complex, vector
 }:
 mkDerivation {
   pname = "hmatrix";
   version = "0.20.2";
-  src = ./.;
-  configureFlags = [ "-fdisable-default-paths" "-fopenblas" ];
+  sha256 = "05462prqkbqpxfbzsgsp8waf0sirg2qz6lzsk7r1ll752n7gqkbg";
+  configureFlags = [ "-fdisable-default-paths"  ];
   libraryHaskellDepends = [
-    array base binary bytestring deepseq primitive random semigroups
-    split storable-complex vector
+    array base binary bytestring deepseq finite-typelits mtl primitive
+    random semigroups split storable-complex vector
   ];
-  buildDepends = [ (if stdenv.isDarwin then [darwin.apple_sdk.frameworks.Accelerate] else []) ];
-  librarySystemDepends = [ openblasCompat ];
+  librarySystemDepends = [ blas lapack ];
   homepage = "https://github.com/haskell-numerics/hmatrix";
   description = "Numeric Linear Algebra";
-  license = stdenv.lib.licenses.bsd3;
+  license = lib.licenses.bsd3;
 }
