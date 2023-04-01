@@ -1,6 +1,5 @@
 final: prev: with final; {
 
-
   haskell = let
     hlib = let oldLib = prev.haskell.lib; in oldLib // {
       configLLVM = drv: oldLib.appendConfigureFlag drv "--ghc-options=-fllvm";
@@ -25,6 +24,15 @@ final: prev: with final; {
         hmatrix-sparse = ./packages/sparse;
         hmatrix-special = ./packages/special;
         hmatrix-tests = ./packages/tests;
+      })
+      (hfinal: hprev: let
+          blas = prev.blas.override {blasProvider = prev.mkl;};
+          lapack = prev.lapack.override {lapackProvider = prev.mkl;};
+        in {
+          hmatrix = hprev.hmatrix.overrideAttrs (old: {
+            buildInputs = [ blas lapack ];
+            configureFlags = [ "-fdisable-default-paths" ];
+          });
       })
     ];
   in prev.haskell // { lib = hlib; inherit packageOverrides; };
