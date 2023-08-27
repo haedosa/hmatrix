@@ -50,7 +50,7 @@ library
                         array,
                         deepseq,
                         random,
-                        split,
+                        split >= 0.2,
                         bytestring,
                         primitive,
                         storable-complex,
@@ -66,8 +66,7 @@ library
                         Numeric.LinearAlgebra.Data
                         Numeric.LinearAlgebra.HMatrix
                         Numeric.LinearAlgebra.Static
-
-    other-modules:      Internal.Vector
+                        Internal.Vector
                         Internal.Devel
                         Internal.Vectorized
                         Internal.Matrix
