@@ -5,7 +5,7 @@
 
     haedosa.url = "github:haedosa/flakes";
     nixpkgs.follows = "haedosa/nixpkgs";
-    flake-utils.follows = "haedosa/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
 
   };
 
